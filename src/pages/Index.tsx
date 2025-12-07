@@ -35,61 +35,61 @@ const Index = () => {
   const products: Product[] = [
     {
       id: 1,
-      name: 'Рубашка "Геометрия"',
-      price: 8900,
-      category: 'Одежда',
-      image: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500',
-      description: 'Хлопковая рубашка с авторским принтом. Лимитированная серия.'
+      name: 'Монстера Деликатесная',
+      price: 3200,
+      category: 'Крупные растения',
+      image: 'https://images.unsplash.com/photo-1614594975525-e45190c55d0b?w=500',
+      description: 'Элегантное растение с резными листьями. Высота 80-100 см.'
     },
     {
       id: 2,
-      name: 'Худи "Минимал"',
-      price: 12500,
-      category: 'Одежда',
-      image: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500',
-      description: 'Оверсайз худи из премиум хлопка с вышивкой.'
+      name: 'Фикус Лирата',
+      price: 4500,
+      category: 'Крупные растения',
+      image: 'https://images.unsplash.com/photo-1597020643961-3a5e9e5a9d96?w=500',
+      description: 'Дерево со скрипичными листьями. Идеально для гостиной.'
     },
     {
       id: 3,
-      name: 'Тотбэг "Арт"',
-      price: 3200,
-      category: 'Аксессуары',
-      image: 'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=500',
-      description: 'Холщовая сумка-тотбэг с авторским рисунком.'
+      name: 'Сансевиерия',
+      price: 1200,
+      category: 'Неприхотливые',
+      image: 'https://images.unsplash.com/photo-1593482892290-2474d2b6c837?w=500',
+      description: 'Теневыносливое растение, не требует частого полива.'
     },
     {
       id: 4,
-      name: 'Кепка "Текстура"',
-      price: 4500,
-      category: 'Аксессуары',
-      image: 'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=500',
-      description: 'Бейсболка с вышитым логотипом, регулируемый размер.'
+      name: 'Суккуленты в горшке',
+      price: 890,
+      category: 'Неприхотливые',
+      image: 'https://images.unsplash.com/photo-1459156212016-c812468e2115?w=500',
+      description: 'Композиция из 3-5 суккулентов в керамическом горшке.'
     },
     {
       id: 5,
-      name: 'Футболка "Абстракт"',
-      price: 5900,
-      category: 'Одежда',
-      image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500',
-      description: 'Оверсайз футболка из органического хлопка с принтом.'
+      name: 'Калатея Орната',
+      price: 2100,
+      category: 'Декоративнолистные',
+      image: 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=500',
+      description: 'Растение с узорчатыми листьями, очищает воздух.'
     },
     {
       id: 6,
-      name: 'Рюкзак "Урбан"',
-      price: 9800,
-      category: 'Аксессуары',
-      image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500',
-      description: 'Стильный городской рюкзак с отделением для ноутбука.'
+      name: 'Замиокулькас',
+      price: 2800,
+      category: 'Неприхотливые',
+      image: 'https://images.unsplash.com/photo-1632207691143-643e2753a2d4?w=500',
+      description: 'Долларовое дерево — символ богатства и благополучия.'
     }
   ];
 
   const reviews: Review[] = [
-    { id: 1, name: 'Анна К.', rating: 5, text: 'Качество на высоте! Рубашка села идеально, ткань приятная. Получаю комплименты.' },
-    { id: 2, name: 'Дмитрий М.', rating: 5, text: 'Заказал худи — не пожалел. Крутой дизайн, удобная посадка. Буду брать ещё.' },
-    { id: 3, name: 'Мария С.', rating: 5, text: 'Тотбэг просто бомба! Вместительный и стильный. Использую каждый день.' }
+    { id: 1, name: 'Анна К.', rating: 5, text: 'Заказала монстеру — пришла в отличном состоянии! Здоровое растение, красивые листья.' },
+    { id: 2, name: 'Дмитрий М.', rating: 5, text: 'Беру растения только здесь. Всегда свежие, хорошо упакованы. Консультируют по уходу.' },
+    { id: 3, name: 'Мария С.', rating: 5, text: 'Суккуленты прижились отлично! Спасибо за подробную инструкцию по уходу.' }
   ];
 
-  const categories = ['Всё', 'Одежда', 'Аксессуары'];
+  const categories = ['Всё', 'Крупные растения', 'Неприхотливые', 'Декоративнолистные'];
 
   const filteredProducts = selectedCategory === 'Всё' 
     ? products 
@@ -276,18 +276,18 @@ const Index = () => {
                 <div className="space-y-2">
                   <h4 className="font-semibold">Описание</h4>
                   <p className="text-sm text-muted-foreground">
-                    Эта вещь создана с вниманием к деталям. Каждый элемент продуман до мелочей. 
-                    Лимитированная серия — только 50 экземпляров. Ручная работа, авторский дизайн.
+                    Здоровое растение, выращенное в оптимальных условиях. Прошло адаптацию 
+                    и готово к переезду в новый дом. Поставляется в транспортировочном горшке.
                   </p>
                 </div>
 
                 <div className="space-y-2">
-                  <h4 className="font-semibold">Состав и уход</h4>
+                  <h4 className="font-semibold">Уход</h4>
                   <ul className="text-sm text-muted-foreground space-y-1">
-                    <li>• 100% органический хлопок</li>
-                    <li>• Стирка при 30°C</li>
-                    <li>• Не использовать отбеливатель</li>
-                    <li>• Гладить при низкой температуре</li>
+                    <li>• Полив: умеренный, 1-2 раза в неделю</li>
+                    <li>• Освещение: рассеянный свет</li>
+                    <li>• Температура: 18-25°C</li>
+                    <li>• Влажность: опрыскивание 2-3 раза в неделю</li>
                   </ul>
                 </div>
                 
@@ -312,13 +312,13 @@ const Index = () => {
         <section id="home" className="min-h-[70vh] flex items-center justify-center bg-gradient-to-br from-background to-secondary/30">
           <div className="container mx-auto px-4 text-center animate-fade-in">
             <Badge className="mb-6" variant="outline">
-              Дизайнерские вещи с характером
+              Живая красота для вашего дома
             </Badge>
             <h2 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight">
               Вот это вещь
             </h2>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Не массмаркет, а особенные, продуманные вещи,<br />которые хочется показывать и обсуждать
+              Комнатные растения с доставкой.<br />Здоровые, ухоженные, с гарантией приживаемости
             </p>
             <Button size="lg" onClick={() => scrollToSection('catalog')} className="group">
               Смотреть коллекцию
@@ -331,7 +331,7 @@ const Index = () => {
           <div className="container mx-auto px-4">
             <div className="text-center mb-8">
               <h2 className="text-4xl font-bold mb-4">Каталог</h2>
-              <p className="text-muted-foreground">Лимитированные серии и авторские работы</p>
+              <p className="text-muted-foreground">Более 100 видов комнатных растений для любого интерьера</p>
             </div>
 
             <div className="flex justify-center gap-4 mb-8">
@@ -394,39 +394,38 @@ const Index = () => {
             
             <div className="space-y-6 text-center">
               <p className="text-lg">
-                <strong className="text-accent">Вот это вещь</strong> — это про вещи с характером: дизайнерские, 
-                ручная работа, лимитированные серии, нестандартные принты и формы.
+                <strong className="text-accent">Вот это вещь</strong> — магазин комнатных растений 
+                для тех, кто ценит живую природу в интерьере.
               </p>
               
               <p className="text-muted-foreground">
-                Мы не продаём одежду и аксессуары. Мы продаём <em>те самые вещи</em>, 
-                которые хочется показывать и обсуждать. Каждая единица товара — результат работы 
-                талантливых дизайнеров и мастеров.
+                Мы выращиваем и отбираем только здоровые растения. Каждое из них проходит 
+                карантин и адаптацию перед продажей. Помогаем с выбором и консультируем по уходу.
               </p>
 
               <div className="grid md:grid-cols-3 gap-8 mt-12">
                 <div className="text-center">
                   <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-accent/10 flex items-center justify-center">
-                    <Icon name="Sparkles" size={32} className="text-accent" />
+                    <Icon name="Leaf" size={32} className="text-accent" />
                   </div>
-                  <h3 className="font-semibold mb-2">Уникальность</h3>
-                  <p className="text-sm text-muted-foreground">Лимитированные серии до 50 экземпляров</p>
+                  <h3 className="font-semibold mb-2">Здоровые растения</h3>
+                  <p className="text-sm text-muted-foreground">Карантин и проверка перед отправкой</p>
                 </div>
                 
                 <div className="text-center">
                   <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-accent/10 flex items-center justify-center">
                     <Icon name="Heart" size={32} className="text-accent" />
                   </div>
-                  <h3 className="font-semibold mb-2">Качество</h3>
-                  <p className="text-sm text-muted-foreground">Ручная работа и премиум материалы</p>
+                  <h3 className="font-semibold mb-2">Гарантия</h3>
+                  <p className="text-sm text-muted-foreground">Замена растения, если оно не прижилось</p>
                 </div>
                 
                 <div className="text-center">
                   <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-accent/10 flex items-center justify-center">
-                    <Icon name="Palette" size={32} className="text-accent" />
+                    <Icon name="MessageCircle" size={32} className="text-accent" />
                   </div>
-                  <h3 className="font-semibold mb-2">Дизайн</h3>
-                  <p className="text-sm text-muted-foreground">Авторские работы талантливых художников</p>
+                  <h3 className="font-semibold mb-2">Консультации</h3>
+                  <p className="text-sm text-muted-foreground">Помогаем выбрать и ухаживать за растениями</p>
                 </div>
               </div>
             </div>
@@ -550,7 +549,7 @@ const Index = () => {
                 <CardContent className="pt-6 text-center">
                   <Icon name="Mail" size={32} className="mx-auto mb-4 text-accent" />
                   <h3 className="font-semibold mb-2">Email</h3>
-                  <p className="text-muted-foreground">info@votetovetsh.ru</p>
+                  <p className="text-muted-foreground">plants@votetovetsh.ru</p>
                 </CardContent>
               </Card>
 
@@ -584,7 +583,7 @@ const Index = () => {
       <footer className="bg-primary text-primary-foreground py-12">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-2xl font-bold mb-4">Вот это вещь</h2>
-          <p className="text-sm opacity-80 mb-6">Дизайнерские вещи с характером</p>
+          <p className="text-sm opacity-80 mb-6">Комнатные растения с любовью</p>
           <div className="flex justify-center gap-6">
             <Button variant="ghost" size="icon" className="text-primary-foreground hover:text-accent">
               <Icon name="Instagram" size={20} />
