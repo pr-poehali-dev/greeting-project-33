@@ -457,6 +457,107 @@ const Index = () => {
           </div>
         </section>
 
+        <section id="faq" className="py-12 bg-secondary/20">
+          <div className="container mx-auto px-4 max-w-3xl">
+            <div className="text-center mb-8">
+              <h2 className="text-4xl font-bold mb-4">Вопросы и ответы</h2>
+              <p className="text-muted-foreground">Популярные вопросы об уходе за растениями</p>
+            </div>
+
+            <div className="space-y-4">
+              <Card>
+                <CardContent className="pt-6">
+                  <div className="flex gap-4">
+                    <div className="flex-shrink-0">
+                      <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center">
+                        <Icon name="Droplets" size={20} className="text-accent" />
+                      </div>
+                    </div>
+                    <div>
+                      <h3 className="font-semibold mb-2">Как часто поливать растения?</h3>
+                      <p className="text-sm text-muted-foreground">
+                        Частота полива зависит от вида растения. Большинство комнатных растений нуждаются в поливе 1-2 раза в неделю летом и реже зимой. Проверяйте почву пальцем — если верхний слой (2-3 см) сухой, пора поливать.
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="pt-6">
+                  <div className="flex gap-4">
+                    <div className="flex-shrink-0">
+                      <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center">
+                        <Icon name="Sun" size={20} className="text-accent" />
+                      </div>
+                    </div>
+                    <div>
+                      <h3 className="font-semibold mb-2">Сколько света нужно растениям?</h3>
+                      <p className="text-sm text-muted-foreground">
+                        Большинству растений нужен яркий рассеянный свет. Избегайте прямых солнечных лучей — они могут обжечь листья. Теневыносливые растения (сансевиерия, замиокулькас) хорошо растут и в глубине комнаты.
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="pt-6">
+                  <div className="flex gap-4">
+                    <div className="flex-shrink-0">
+                      <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center">
+                        <Icon name="Thermometer" size={20} className="text-accent" />
+                      </div>
+                    </div>
+                    <div>
+                      <h3 className="font-semibold mb-2">Какая температура оптимальна?</h3>
+                      <p className="text-sm text-muted-foreground">
+                        Комнатная температура 18-25°C идеальна для большинства растений. Избегайте сквозняков и резких перепадов температуры. Зимой держите растения подальше от батарей отопления.
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="pt-6">
+                  <div className="flex gap-4">
+                    <div className="flex-shrink-0">
+                      <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center">
+                        <Icon name="Bug" size={20} className="text-accent" />
+                      </div>
+                    </div>
+                    <div>
+                      <h3 className="font-semibold mb-2">Что делать с вредителями?</h3>
+                      <p className="text-sm text-muted-foreground">
+                        При появлении вредителей (паутинный клещ, тля) изолируйте растение. Протрите листья мыльным раствором или используйте специальные препараты. Регулярный осмотр помогает выявить проблему на ранней стадии.
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="pt-6">
+                  <div className="flex gap-4">
+                    <div className="flex-shrink-0">
+                      <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center">
+                        <Icon name="Sprout" size={20} className="text-accent" />
+                      </div>
+                    </div>
+                    <div>
+                      <h3 className="font-semibold mb-2">Когда пересаживать растение?</h3>
+                      <p className="text-sm text-muted-foreground">
+                        Молодые растения пересаживают раз в год весной, взрослые — раз в 2-3 года. Признаки необходимости пересадки: корни выглядывают из дренажных отверстий, земля быстро пересыхает, рост замедлился.
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+
         <section id="checkout" className="py-12 bg-secondary/20">
           <div className="container mx-auto px-4 max-w-2xl">
             <div className="text-center mb-8">
