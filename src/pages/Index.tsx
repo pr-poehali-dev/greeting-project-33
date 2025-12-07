@@ -70,7 +70,7 @@ const Index = () => {
       name: 'Калатея Орната',
       price: 2100,
       category: 'Декоративнолистные',
-      image: 'https://images.unsplash.com/photo-1525498128493-380d1990a112?w=500',
+      image: 'https://cdn.poehali.dev/files/7f3755d1-4f61-491d-9d6f-912937fa5a3d.png',
       description: 'Растение с узорчатыми листьями, очищает воздух.'
     },
     {
