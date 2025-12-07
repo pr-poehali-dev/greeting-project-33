@@ -327,14 +327,14 @@ const Index = () => {
           </div>
         </section>
 
-        <section id="catalog" className="py-20 bg-background">
+        <section id="catalog" className="py-12 bg-background">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
+            <div className="text-center mb-8">
               <h2 className="text-4xl font-bold mb-4">Каталог</h2>
               <p className="text-muted-foreground">Лимитированные серии и авторские работы</p>
             </div>
 
-            <div className="flex justify-center gap-4 mb-12">
+            <div className="flex justify-center gap-4 mb-8">
               {categories.map(cat => (
                 <Button
                   key={cat}
@@ -346,7 +346,7 @@ const Index = () => {
               ))}
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredProducts.map(product => (
                 <Card 
                   key={product.id} 
@@ -386,9 +386,9 @@ const Index = () => {
           </div>
         </section>
 
-        <section id="about" className="py-20 bg-secondary/20">
+        <section id="about" className="py-12 bg-secondary/20">
           <div className="container mx-auto px-4 max-w-4xl">
-            <div className="text-center mb-12">
+            <div className="text-center mb-8">
               <h2 className="text-4xl font-bold mb-4">О нас</h2>
             </div>
             
@@ -433,9 +433,9 @@ const Index = () => {
           </div>
         </section>
 
-        <section id="reviews" className="py-20 bg-background">
+        <section id="reviews" className="py-12 bg-background">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
+            <div className="text-center mb-8">
               <h2 className="text-4xl font-bold mb-4">Отзывы</h2>
               <p className="text-muted-foreground">Что говорят наши клиенты</p>
             </div>
@@ -458,9 +458,9 @@ const Index = () => {
           </div>
         </section>
 
-        <section id="checkout" className="py-20 bg-secondary/20">
+        <section id="checkout" className="py-12 bg-secondary/20">
           <div className="container mx-auto px-4 max-w-2xl">
-            <div className="text-center mb-12">
+            <div className="text-center mb-8">
               <h2 className="text-4xl font-bold mb-4">Оформление заказа</h2>
             </div>
 
@@ -538,9 +538,9 @@ const Index = () => {
           </div>
         </section>
 
-        <section id="contacts" className="py-20 bg-background">
+        <section id="contacts" className="py-12 bg-background">
           <div className="container mx-auto px-4 max-w-2xl">
-            <div className="text-center mb-12">
+            <div className="text-center mb-8">
               <h2 className="text-4xl font-bold mb-4">Контакты</h2>
               <p className="text-muted-foreground">Свяжитесь с нами любым удобным способом</p>
             </div>
