@@ -38,7 +38,7 @@ const Index = () => {
       name: 'Монстера Деликатесная',
       price: 3200,
       category: 'Крупные растения',
-      image: 'https://images.unsplash.com/photo-1512428559087-560fa5ceab42?w=500',
+      image: 'https://cdn.poehali.dev/files/cbbdf6e4-2c43-4562-a107-a87fd7b1ee7d.png',
       description: 'Элегантное растение с резными листьями. Высота 80-100 см.'
     },
     {
