@@ -1,12 +1,594 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardFooter } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import Icon from '@/components/ui/icon';
+
+interface Product {
+  id: number;
+  name: string;
+  price: number;
+  category: string;
+  image: string;
+  description: string;
+}
+
+interface CartItem extends Product {
+  quantity: number;
+}
+
+interface Review {
+  id: number;
+  name: string;
+  rating: number;
+  text: string;
+}
 
 const Index = () => {
+  const [activeSection, setActiveSection] = useState('home');
+  const [cart, setCart] = useState<CartItem[]>([]);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string>('Всё');
+
+  const products: Product[] = [
+    {
+      id: 1,
+      name: 'Рубашка "Геометрия"',
+      price: 8900,
+      category: 'Одежда',
+      image: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500',
+      description: 'Хлопковая рубашка с авторским принтом. Лимитированная серия.'
+    },
+    {
+      id: 2,
+      name: 'Худи "Минимал"',
+      price: 12500,
+      category: 'Одежда',
+      image: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500',
+      description: 'Оверсайз худи из премиум хлопка с вышивкой.'
+    },
+    {
+      id: 3,
+      name: 'Тотбэг "Арт"',
+      price: 3200,
+      category: 'Аксессуары',
+      image: 'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=500',
+      description: 'Холщовая сумка-тотбэг с авторским рисунком.'
+    },
+    {
+      id: 4,
+      name: 'Кепка "Текстура"',
+      price: 4500,
+      category: 'Аксессуары',
+      image: 'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=500',
+      description: 'Бейсболка с вышитым логотипом, регулируемый размер.'
+    },
+    {
+      id: 5,
+      name: 'Футболка "Абстракт"',
+      price: 5900,
+      category: 'Одежда',
+      image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500',
+      description: 'Оверсайз футболка из органического хлопка с принтом.'
+    },
+    {
+      id: 6,
+      name: 'Рюкзак "Урбан"',
+      price: 9800,
+      category: 'Аксессуары',
+      image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500',
+      description: 'Стильный городской рюкзак с отделением для ноутбука.'
+    }
+  ];
+
+  const reviews: Review[] = [
+    { id: 1, name: 'Анна К.', rating: 5, text: 'Качество на высоте! Рубашка села идеально, ткань приятная. Получаю комплименты.' },
+    { id: 2, name: 'Дмитрий М.', rating: 5, text: 'Заказал худи — не пожалел. Крутой дизайн, удобная посадка. Буду брать ещё.' },
+    { id: 3, name: 'Мария С.', rating: 5, text: 'Тотбэг просто бомба! Вместительный и стильный. Использую каждый день.' }
+  ];
+
+  const categories = ['Всё', 'Одежда', 'Аксессуары'];
+
+  const filteredProducts = selectedCategory === 'Всё' 
+    ? products 
+    : products.filter(p => p.category === selectedCategory);
+
+  const addToCart = (product: Product) => {
+    const existing = cart.find(item => item.id === product.id);
+    if (existing) {
+      setCart(cart.map(item => 
+        item.id === product.id 
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
+      ));
+    } else {
+      setCart([...cart, { ...product, quantity: 1 }]);
+    }
+  };
+
+  const removeFromCart = (id: number) => {
+    setCart(cart.filter(item => item.id !== id));
+  };
+
+  const updateQuantity = (id: number, quantity: number) => {
+    if (quantity <= 0) {
+      removeFromCart(id);
+    } else {
+      setCart(cart.map(item => 
+        item.id === id ? { ...item, quantity } : item
+      ));
+    }
+  };
+
+  const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+  const scrollToSection = (section: string) => {
+    setActiveSection(section);
+    const element = document.getElementById(section);
+    element?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4 color-black text-black">Добро пожаловать!</h1>
-        <p className="text-xl text-gray-600">тут будет отображаться ваш проект</p>
-      </div>
+    <div className="min-h-screen">
+      <header className="fixed top-0 w-full bg-background/95 backdrop-blur-sm border-b z-50">
+        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+          <h1 className="text-2xl font-bold tracking-tight">Вот это вещь</h1>
+          
+          <nav className="hidden md:flex gap-8">
+            <button onClick={() => scrollToSection('home')} className="text-sm hover:text-accent transition-colors">
+              Главная
+            </button>
+            <button onClick={() => scrollToSection('catalog')} className="text-sm hover:text-accent transition-colors">
+              Каталог
+            </button>
+            <button onClick={() => scrollToSection('about')} className="text-sm hover:text-accent transition-colors">
+              О нас
+            </button>
+            <button onClick={() => scrollToSection('reviews')} className="text-sm hover:text-accent transition-colors">
+              Отзывы
+            </button>
+            <button onClick={() => scrollToSection('contacts')} className="text-sm hover:text-accent transition-colors">
+              Контакты
+            </button>
+          </nav>
+
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="outline" size="icon" className="relative">
+                <Icon name="ShoppingCart" size={20} />
+                {cartCount > 0 && (
+                  <Badge className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center p-0 text-xs">
+                    {cartCount}
+                  </Badge>
+                )}
+              </Button>
+            </SheetTrigger>
+            <SheetContent className="w-full sm:max-w-md">
+              <SheetHeader>
+                <SheetTitle>Корзина</SheetTitle>
+              </SheetHeader>
+              
+              {cart.length === 0 ? (
+                <div className="flex flex-col items-center justify-center h-[60vh] text-muted-foreground">
+                  <Icon name="ShoppingBag" size={64} className="mb-4 opacity-20" />
+                  <p>Корзина пуста</p>
+                </div>
+              ) : (
+                <div className="mt-8 space-y-4">
+                  {cart.map(item => (
+                    <div key={item.id} className="flex gap-4 border-b pb-4">
+                      <img src={item.image} alt={item.name} className="w-20 h-20 object-cover rounded" />
+                      <div className="flex-1">
+                        <h4 className="font-medium text-sm">{item.name}</h4>
+                        <p className="text-sm text-muted-foreground">{item.price.toLocaleString()} ₽</p>
+                        <div className="flex items-center gap-2 mt-2">
+                          <Button 
+                            size="icon" 
+                            variant="outline" 
+                            className="h-6 w-6"
+                            onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                          >
+                            <Icon name="Minus" size={12} />
+                          </Button>
+                          <span className="text-sm w-8 text-center">{item.quantity}</span>
+                          <Button 
+                            size="icon" 
+                            variant="outline" 
+                            className="h-6 w-6"
+                            onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                          >
+                            <Icon name="Plus" size={12} />
+                          </Button>
+                          <Button 
+                            size="icon" 
+                            variant="ghost" 
+                            className="h-6 w-6 ml-auto"
+                            onClick={() => removeFromCart(item.id)}
+                          >
+                            <Icon name="X" size={12} />
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                  
+                  <div className="pt-4 space-y-4">
+                    <div className="flex justify-between text-lg font-semibold">
+                      <span>Итого:</span>
+                      <span>{totalPrice.toLocaleString()} ₽</span>
+                    </div>
+                    <Button 
+                      className="w-full" 
+                      size="lg"
+                      onClick={() => {
+                        scrollToSection('checkout');
+                        document.querySelector('[data-state="open"]')?.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+                      }}
+                    >
+                      Оформить заказ
+                    </Button>
+                  </div>
+                </div>
+              )}
+            </SheetContent>
+          </Sheet>
+        </div>
+      </header>
+
+      <main className="pt-16">
+        <section id="home" className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background to-secondary/30">
+          <div className="container mx-auto px-4 text-center animate-fade-in">
+            <Badge className="mb-6" variant="outline">
+              Дизайнерские вещи с характером
+            </Badge>
+            <h2 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight">
+              Вот это вещь
+            </h2>
+            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+              Не массмаркет, а особенные, продуманные вещи,<br />которые хочется показывать и обсуждать
+            </p>
+            <Button size="lg" onClick={() => scrollToSection('catalog')} className="group">
+              Смотреть коллекцию
+              <Icon name="ArrowRight" size={20} className="ml-2 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </div>
+        </section>
+
+        <section id="catalog" className="py-20 bg-background">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold mb-4">Каталог</h2>
+              <p className="text-muted-foreground">Лимитированные серии и авторские работы</p>
+            </div>
+
+            <div className="flex justify-center gap-4 mb-12">
+              {categories.map(cat => (
+                <Button
+                  key={cat}
+                  variant={selectedCategory === cat ? 'default' : 'outline'}
+                  onClick={() => setSelectedCategory(cat)}
+                >
+                  {cat}
+                </Button>
+              ))}
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredProducts.map(product => (
+                <Card 
+                  key={product.id} 
+                  className="group cursor-pointer overflow-hidden hover:shadow-lg transition-all duration-300"
+                  onClick={() => setSelectedProduct(product)}
+                >
+                  <div className="aspect-square overflow-hidden bg-secondary/20">
+                    <img 
+                      src={product.image} 
+                      alt={product.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                  <CardContent className="pt-4">
+                    <div className="flex justify-between items-start mb-2">
+                      <h3 className="font-semibold">{product.name}</h3>
+                      <Badge variant="outline">{product.category}</Badge>
+                    </div>
+                    <p className="text-sm text-muted-foreground mb-4">{product.description}</p>
+                    <p className="text-xl font-bold">{product.price.toLocaleString()} ₽</p>
+                  </CardContent>
+                  <CardFooter>
+                    <Button 
+                      className="w-full" 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        addToCart(product);
+                      }}
+                    >
+                      <Icon name="ShoppingCart" size={16} className="mr-2" />
+                      В корзину
+                    </Button>
+                  </CardFooter>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {selectedProduct && (
+          <Sheet open={!!selectedProduct} onOpenChange={() => setSelectedProduct(null)}>
+            <SheetContent className="w-full sm:max-w-2xl overflow-y-auto">
+              <SheetHeader>
+                <SheetTitle>{selectedProduct.name}</SheetTitle>
+              </SheetHeader>
+              
+              <div className="mt-6 space-y-6">
+                <img 
+                  src={selectedProduct.image} 
+                  alt={selectedProduct.name}
+                  className="w-full aspect-square object-cover rounded-lg"
+                />
+                
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <Badge>{selectedProduct.category}</Badge>
+                    <p className="text-2xl font-bold">{selectedProduct.price.toLocaleString()} ₽</p>
+                  </div>
+                  
+                  <p className="text-muted-foreground">{selectedProduct.description}</p>
+                  
+                  <div className="space-y-2">
+                    <h4 className="font-semibold">Описание</h4>
+                    <p className="text-sm text-muted-foreground">
+                      Эта вещь создана с вниманием к деталям. Каждый элемент продуман до мелочей. 
+                      Лимитированная серия — только 50 экземпляров. Ручная работа, авторский дизайн.
+                    </p>
+                  </div>
+
+                  <div className="space-y-2">
+                    <h4 className="font-semibold">Состав и уход</h4>
+                    <ul className="text-sm text-muted-foreground space-y-1">
+                      <li>• 100% органический хлопок</li>
+                      <li>• Стирка при 30°C</li>
+                      <li>• Не использовать отбеливатель</li>
+                      <li>• Гладить при низкой температуре</li>
+                    </ul>
+                  </div>
+                  
+                  <Button 
+                    size="lg" 
+                    className="w-full"
+                    onClick={() => {
+                      addToCart(selectedProduct);
+                      setSelectedProduct(null);
+                    }}
+                  >
+                    <Icon name="ShoppingCart" size={20} className="mr-2" />
+                    Добавить в корзину
+                  </Button>
+                </div>
+              </div>
+            </SheetContent>
+          </Sheet>
+        )}
+
+        <section id="about" className="py-20 bg-secondary/20">
+          <div className="container mx-auto px-4 max-w-4xl">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold mb-4">О нас</h2>
+            </div>
+            
+            <div className="space-y-6 text-center">
+              <p className="text-lg">
+                <strong className="text-accent">Вот это вещь</strong> — это про вещи с характером: дизайнерские, 
+                ручная работа, лимитированные серии, нестандартные принты и формы.
+              </p>
+              
+              <p className="text-muted-foreground">
+                Мы не продаём одежду и аксессуары. Мы продаём <em>те самые вещи</em>, 
+                которые хочется показывать и обсуждать. Каждая единица товара — результат работы 
+                талантливых дизайнеров и мастеров.
+              </p>
+
+              <div className="grid md:grid-cols-3 gap-8 mt-12">
+                <div className="text-center">
+                  <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-accent/10 flex items-center justify-center">
+                    <Icon name="Sparkles" size={32} className="text-accent" />
+                  </div>
+                  <h3 className="font-semibold mb-2">Уникальность</h3>
+                  <p className="text-sm text-muted-foreground">Лимитированные серии до 50 экземпляров</p>
+                </div>
+                
+                <div className="text-center">
+                  <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-accent/10 flex items-center justify-center">
+                    <Icon name="Heart" size={32} className="text-accent" />
+                  </div>
+                  <h3 className="font-semibold mb-2">Качество</h3>
+                  <p className="text-sm text-muted-foreground">Ручная работа и премиум материалы</p>
+                </div>
+                
+                <div className="text-center">
+                  <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-accent/10 flex items-center justify-center">
+                    <Icon name="Palette" size={32} className="text-accent" />
+                  </div>
+                  <h3 className="font-semibold mb-2">Дизайн</h3>
+                  <p className="text-sm text-muted-foreground">Авторские работы талантливых художников</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="reviews" className="py-20 bg-background">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold mb-4">Отзывы</h2>
+              <p className="text-muted-foreground">Что говорят наши клиенты</p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+              {reviews.map(review => (
+                <Card key={review.id} className="hover:shadow-lg transition-shadow">
+                  <CardContent className="pt-6">
+                    <div className="flex items-center gap-1 mb-4">
+                      {[...Array(review.rating)].map((_, i) => (
+                        <Icon key={i} name="Star" size={16} className="fill-accent text-accent" />
+                      ))}
+                    </div>
+                    <p className="text-sm mb-4 italic">"{review.text}"</p>
+                    <p className="font-semibold text-sm">{review.name}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="checkout" className="py-20 bg-secondary/20">
+          <div className="container mx-auto px-4 max-w-2xl">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold mb-4">Оформление заказа</h2>
+            </div>
+
+            <Card>
+              <CardContent className="pt-6">
+                <Tabs defaultValue="delivery">
+                  <TabsList className="grid w-full grid-cols-2 mb-6">
+                    <TabsTrigger value="delivery">Доставка</TabsTrigger>
+                    <TabsTrigger value="payment">Оплата</TabsTrigger>
+                  </TabsList>
+                  
+                  <TabsContent value="delivery" className="space-y-4">
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium">Имя</label>
+                      <Input placeholder="Ваше имя" />
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium">Телефон</label>
+                      <Input placeholder="+7 (___) ___-__-__" />
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium">Email</label>
+                      <Input type="email" placeholder="your@email.com" />
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium">Адрес доставки</label>
+                      <Textarea placeholder="Город, улица, дом, квартира" rows={3} />
+                    </div>
+                  </TabsContent>
+                  
+                  <TabsContent value="payment" className="space-y-4">
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium">Номер карты</label>
+                      <Input placeholder="0000 0000 0000 0000" />
+                    </div>
+                    
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium">Срок действия</label>
+                        <Input placeholder="MM/YY" />
+                      </div>
+                      
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium">CVV</label>
+                        <Input placeholder="***" type="password" maxLength={3} />
+                      </div>
+                    </div>
+
+                    {cart.length > 0 && (
+                      <div className="mt-6 pt-6 border-t space-y-2">
+                        <div className="flex justify-between text-sm">
+                          <span className="text-muted-foreground">Товары:</span>
+                          <span>{totalPrice.toLocaleString()} ₽</span>
+                        </div>
+                        <div className="flex justify-between text-sm">
+                          <span className="text-muted-foreground">Доставка:</span>
+                          <span>Бесплатно</span>
+                        </div>
+                        <div className="flex justify-between text-lg font-bold pt-2">
+                          <span>Итого:</span>
+                          <span>{totalPrice.toLocaleString()} ₽</span>
+                        </div>
+                      </div>
+                    )}
+                    
+                    <Button size="lg" className="w-full mt-6" disabled={cart.length === 0}>
+                      Оплатить заказ
+                    </Button>
+                  </TabsContent>
+                </Tabs>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+
+        <section id="contacts" className="py-20 bg-background">
+          <div className="container mx-auto px-4 max-w-2xl">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold mb-4">Контакты</h2>
+              <p className="text-muted-foreground">Свяжитесь с нами любым удобным способом</p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8 mb-12">
+              <Card>
+                <CardContent className="pt-6 text-center">
+                  <Icon name="Mail" size={32} className="mx-auto mb-4 text-accent" />
+                  <h3 className="font-semibold mb-2">Email</h3>
+                  <p className="text-muted-foreground">info@votetovetsh.ru</p>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="pt-6 text-center">
+                  <Icon name="Phone" size={32} className="mx-auto mb-4 text-accent" />
+                  <h3 className="font-semibold mb-2">Телефон</h3>
+                  <p className="text-muted-foreground">+7 (999) 123-45-67</p>
+                </CardContent>
+              </Card>
+            </div>
+
+            <Card>
+              <CardContent className="pt-6">
+                <h3 className="font-semibold mb-4">Напишите нам</h3>
+                <div className="space-y-4">
+                  <Input placeholder="Ваше имя" />
+                  <Input type="email" placeholder="Email" />
+                  <Textarea placeholder="Ваше сообщение" rows={4} />
+                  <Button className="w-full">
+                    <Icon name="Send" size={16} className="mr-2" />
+                    Отправить
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+      </main>
+
+      <footer className="bg-primary text-primary-foreground py-12">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-2xl font-bold mb-4">Вот это вещь</h2>
+          <p className="text-sm opacity-80 mb-6">Дизайнерские вещи с характером</p>
+          <div className="flex justify-center gap-6">
+            <Button variant="ghost" size="icon" className="text-primary-foreground hover:text-accent">
+              <Icon name="Instagram" size={20} />
+            </Button>
+            <Button variant="ghost" size="icon" className="text-primary-foreground hover:text-accent">
+              <Icon name="Facebook" size={20} />
+            </Button>
+            <Button variant="ghost" size="icon" className="text-primary-foreground hover:text-accent">
+              <Icon name="Twitter" size={20} />
+            </Button>
+          </div>
+          <p className="text-xs opacity-60 mt-8">© 2024 Вот это вещь. Все права защищены.</p>
+        </div>
+      </footer>
     </div>
   );
 };
