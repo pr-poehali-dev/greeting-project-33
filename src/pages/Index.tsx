@@ -4,8 +4,6 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Icon from '@/components/ui/icon';
 
 interface Product {
@@ -29,10 +27,10 @@ interface Review {
 }
 
 const Index = () => {
-  const [activeSection, setActiveSection] = useState('home');
   const [cart, setCart] = useState<CartItem[]>([]);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>('Всё');
+  const [showCart, setShowCart] = useState(false);
 
   const products: Product[] = [
     {
@@ -108,6 +106,7 @@ const Index = () => {
     } else {
       setCart([...cart, { ...product, quantity: 1 }]);
     }
+    setShowCart(true);
   };
 
   const removeFromCart = (id: number) => {
@@ -128,7 +127,6 @@ const Index = () => {
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   const scrollToSection = (section: string) => {
-    setActiveSection(section);
     const element = document.getElementById(section);
     element?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -157,88 +155,158 @@ const Index = () => {
             </button>
           </nav>
 
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button variant="outline" size="icon" className="relative">
-                <Icon name="ShoppingCart" size={20} />
-                {cartCount > 0 && (
-                  <Badge className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center p-0 text-xs">
-                    {cartCount}
-                  </Badge>
-                )}
-              </Button>
-            </SheetTrigger>
-            <SheetContent className="w-full sm:max-w-md">
-              <SheetHeader>
-                <SheetTitle>Корзина</SheetTitle>
-              </SheetHeader>
-              
-              {cart.length === 0 ? (
-                <div className="flex flex-col items-center justify-center h-[60vh] text-muted-foreground">
-                  <Icon name="ShoppingBag" size={64} className="mb-4 opacity-20" />
-                  <p>Корзина пуста</p>
-                </div>
-              ) : (
-                <div className="mt-8 space-y-4">
-                  {cart.map(item => (
-                    <div key={item.id} className="flex gap-4 border-b pb-4">
-                      <img src={item.image} alt={item.name} className="w-20 h-20 object-cover rounded" />
-                      <div className="flex-1">
-                        <h4 className="font-medium text-sm">{item.name}</h4>
-                        <p className="text-sm text-muted-foreground">{item.price.toLocaleString()} ₽</p>
-                        <div className="flex items-center gap-2 mt-2">
-                          <Button 
-                            size="icon" 
-                            variant="outline" 
-                            className="h-6 w-6"
-                            onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                          >
-                            <Icon name="Minus" size={12} />
-                          </Button>
-                          <span className="text-sm w-8 text-center">{item.quantity}</span>
-                          <Button 
-                            size="icon" 
-                            variant="outline" 
-                            className="h-6 w-6"
-                            onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                          >
-                            <Icon name="Plus" size={12} />
-                          </Button>
-                          <Button 
-                            size="icon" 
-                            variant="ghost" 
-                            className="h-6 w-6 ml-auto"
-                            onClick={() => removeFromCart(item.id)}
-                          >
-                            <Icon name="X" size={12} />
-                          </Button>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                  
-                  <div className="pt-4 space-y-4">
-                    <div className="flex justify-between text-lg font-semibold">
-                      <span>Итого:</span>
-                      <span>{totalPrice.toLocaleString()} ₽</span>
-                    </div>
-                    <Button 
-                      className="w-full" 
-                      size="lg"
-                      onClick={() => {
-                        scrollToSection('checkout');
-                        document.querySelector('[data-state="open"]')?.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
-                      }}
-                    >
-                      Оформить заказ
-                    </Button>
-                  </div>
-                </div>
-              )}
-            </SheetContent>
-          </Sheet>
+          <Button variant="outline" size="icon" className="relative" onClick={() => setShowCart(!showCart)}>
+            <Icon name="ShoppingCart" size={20} />
+            {cartCount > 0 && (
+              <Badge className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center p-0 text-xs">
+                {cartCount}
+              </Badge>
+            )}
+          </Button>
         </div>
       </header>
+
+      {showCart && (
+        <div className="fixed inset-0 bg-black/50 z-50" onClick={() => setShowCart(false)}>
+          <div 
+            className="fixed right-0 top-0 h-full w-full sm:max-w-md bg-background shadow-xl p-6 overflow-y-auto animate-slide-in-right"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-2xl font-bold">Корзина</h2>
+              <Button variant="ghost" size="icon" onClick={() => setShowCart(false)}>
+                <Icon name="X" size={20} />
+              </Button>
+            </div>
+            
+            {cart.length === 0 ? (
+              <div className="flex flex-col items-center justify-center h-[60vh] text-muted-foreground">
+                <Icon name="ShoppingBag" size={64} className="mb-4 opacity-20" />
+                <p>Корзина пуста</p>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                {cart.map(item => (
+                  <div key={item.id} className="flex gap-4 border-b pb-4">
+                    <img src={item.image} alt={item.name} className="w-20 h-20 object-cover rounded" />
+                    <div className="flex-1">
+                      <h4 className="font-medium text-sm">{item.name}</h4>
+                      <p className="text-sm text-muted-foreground">{item.price.toLocaleString()} ₽</p>
+                      <div className="flex items-center gap-2 mt-2">
+                        <Button 
+                          size="icon" 
+                          variant="outline" 
+                          className="h-6 w-6"
+                          onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                        >
+                          <Icon name="Minus" size={12} />
+                        </Button>
+                        <span className="text-sm w-8 text-center">{item.quantity}</span>
+                        <Button 
+                          size="icon" 
+                          variant="outline" 
+                          className="h-6 w-6"
+                          onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                        >
+                          <Icon name="Plus" size={12} />
+                        </Button>
+                        <Button 
+                          size="icon" 
+                          variant="ghost" 
+                          className="h-6 w-6 ml-auto"
+                          onClick={() => removeFromCart(item.id)}
+                        >
+                          <Icon name="X" size={12} />
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+                
+                <div className="pt-4 space-y-4">
+                  <div className="flex justify-between text-lg font-semibold">
+                    <span>Итого:</span>
+                    <span>{totalPrice.toLocaleString()} ₽</span>
+                  </div>
+                  <Button 
+                    className="w-full" 
+                    size="lg"
+                    onClick={() => {
+                      scrollToSection('checkout');
+                      setShowCart(false);
+                    }}
+                  >
+                    Оформить заказ
+                  </Button>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {selectedProduct && (
+        <div className="fixed inset-0 bg-black/50 z-50" onClick={() => setSelectedProduct(null)}>
+          <div 
+            className="fixed right-0 top-0 h-full w-full sm:max-w-2xl bg-background shadow-xl p-6 overflow-y-auto animate-slide-in-right"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-2xl font-bold">{selectedProduct.name}</h2>
+              <Button variant="ghost" size="icon" onClick={() => setSelectedProduct(null)}>
+                <Icon name="X" size={20} />
+              </Button>
+            </div>
+            
+            <div className="space-y-6">
+              <img 
+                src={selectedProduct.image} 
+                alt={selectedProduct.name}
+                className="w-full aspect-square object-cover rounded-lg"
+              />
+              
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <Badge>{selectedProduct.category}</Badge>
+                  <p className="text-2xl font-bold">{selectedProduct.price.toLocaleString()} ₽</p>
+                </div>
+                
+                <p className="text-muted-foreground">{selectedProduct.description}</p>
+                
+                <div className="space-y-2">
+                  <h4 className="font-semibold">Описание</h4>
+                  <p className="text-sm text-muted-foreground">
+                    Эта вещь создана с вниманием к деталям. Каждый элемент продуман до мелочей. 
+                    Лимитированная серия — только 50 экземпляров. Ручная работа, авторский дизайн.
+                  </p>
+                </div>
+
+                <div className="space-y-2">
+                  <h4 className="font-semibold">Состав и уход</h4>
+                  <ul className="text-sm text-muted-foreground space-y-1">
+                    <li>• 100% органический хлопок</li>
+                    <li>• Стирка при 30°C</li>
+                    <li>• Не использовать отбеливатель</li>
+                    <li>• Гладить при низкой температуре</li>
+                  </ul>
+                </div>
+                
+                <Button 
+                  size="lg" 
+                  className="w-full"
+                  onClick={() => {
+                    addToCart(selectedProduct);
+                    setSelectedProduct(null);
+                  }}
+                >
+                  <Icon name="ShoppingCart" size={20} className="mr-2" />
+                  Добавить в корзину
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       <main className="pt-16">
         <section id="home" className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background to-secondary/30">
@@ -317,63 +385,6 @@ const Index = () => {
             </div>
           </div>
         </section>
-
-        {selectedProduct && (
-          <Sheet open={!!selectedProduct} onOpenChange={() => setSelectedProduct(null)}>
-            <SheetContent className="w-full sm:max-w-2xl overflow-y-auto">
-              <SheetHeader>
-                <SheetTitle>{selectedProduct.name}</SheetTitle>
-              </SheetHeader>
-              
-              <div className="mt-6 space-y-6">
-                <img 
-                  src={selectedProduct.image} 
-                  alt={selectedProduct.name}
-                  className="w-full aspect-square object-cover rounded-lg"
-                />
-                
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <Badge>{selectedProduct.category}</Badge>
-                    <p className="text-2xl font-bold">{selectedProduct.price.toLocaleString()} ₽</p>
-                  </div>
-                  
-                  <p className="text-muted-foreground">{selectedProduct.description}</p>
-                  
-                  <div className="space-y-2">
-                    <h4 className="font-semibold">Описание</h4>
-                    <p className="text-sm text-muted-foreground">
-                      Эта вещь создана с вниманием к деталям. Каждый элемент продуман до мелочей. 
-                      Лимитированная серия — только 50 экземпляров. Ручная работа, авторский дизайн.
-                    </p>
-                  </div>
-
-                  <div className="space-y-2">
-                    <h4 className="font-semibold">Состав и уход</h4>
-                    <ul className="text-sm text-muted-foreground space-y-1">
-                      <li>• 100% органический хлопок</li>
-                      <li>• Стирка при 30°C</li>
-                      <li>• Не использовать отбеливатель</li>
-                      <li>• Гладить при низкой температуре</li>
-                    </ul>
-                  </div>
-                  
-                  <Button 
-                    size="lg" 
-                    className="w-full"
-                    onClick={() => {
-                      addToCart(selectedProduct);
-                      setSelectedProduct(null);
-                    }}
-                  >
-                    <Icon name="ShoppingCart" size={20} className="mr-2" />
-                    Добавить в корзину
-                  </Button>
-                </div>
-              </div>
-            </SheetContent>
-          </Sheet>
-        )}
 
         <section id="about" className="py-20 bg-secondary/20">
           <div className="container mx-auto px-4 max-w-4xl">
@@ -454,14 +465,10 @@ const Index = () => {
             </div>
 
             <Card>
-              <CardContent className="pt-6">
-                <Tabs defaultValue="delivery">
-                  <TabsList className="grid w-full grid-cols-2 mb-6">
-                    <TabsTrigger value="delivery">Доставка</TabsTrigger>
-                    <TabsTrigger value="payment">Оплата</TabsTrigger>
-                  </TabsList>
-                  
-                  <TabsContent value="delivery" className="space-y-4">
+              <CardContent className="pt-6 space-y-6">
+                <div>
+                  <h3 className="text-lg font-semibold mb-4">Информация о доставке</h3>
+                  <div className="space-y-4">
                     <div className="space-y-2">
                       <label className="text-sm font-medium">Имя</label>
                       <Input placeholder="Ваше имя" />
@@ -481,9 +488,12 @@ const Index = () => {
                       <label className="text-sm font-medium">Адрес доставки</label>
                       <Textarea placeholder="Город, улица, дом, квартира" rows={3} />
                     </div>
-                  </TabsContent>
-                  
-                  <TabsContent value="payment" className="space-y-4">
+                  </div>
+                </div>
+
+                <div className="border-t pt-6">
+                  <h3 className="text-lg font-semibold mb-4">Оплата</h3>
+                  <div className="space-y-4">
                     <div className="space-y-2">
                       <label className="text-sm font-medium">Номер карты</label>
                       <Input placeholder="0000 0000 0000 0000" />
@@ -521,8 +531,8 @@ const Index = () => {
                     <Button size="lg" className="w-full mt-6" disabled={cart.length === 0}>
                       Оплатить заказ
                     </Button>
-                  </TabsContent>
-                </Tabs>
+                  </div>
+                </div>
               </CardContent>
             </Card>
           </div>
