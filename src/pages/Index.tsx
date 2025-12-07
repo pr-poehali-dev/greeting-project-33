@@ -38,7 +38,7 @@ const Index = () => {
       name: 'Монстера Деликатесная',
       price: 3200,
       category: 'Крупные растения',
-      image: 'https://images.unsplash.com/photo-1614594975525-e45190c55d0b?w=500',
+      image: 'https://images.unsplash.com/photo-1512428559087-560fa5ceab42?w=500',
       description: 'Элегантное растение с резными листьями. Высота 80-100 см.'
     },
     {
@@ -46,7 +46,7 @@ const Index = () => {
       name: 'Фикус Лирата',
       price: 4500,
       category: 'Крупные растения',
-      image: 'https://images.unsplash.com/photo-1597020643961-3a5e9e5a9d96?w=500',
+      image: 'https://images.unsplash.com/photo-1545241047-6083a3684587?w=500',
       description: 'Дерево со скрипичными листьями. Идеально для гостиной.'
     },
     {
@@ -54,7 +54,7 @@ const Index = () => {
       name: 'Сансевиерия',
       price: 1200,
       category: 'Неприхотливые',
-      image: 'https://images.unsplash.com/photo-1593482892290-2474d2b6c837?w=500',
+      image: 'https://images.unsplash.com/photo-1509937528035-ad76254b0356?w=500',
       description: 'Теневыносливое растение, не требует частого полива.'
     },
     {
@@ -70,7 +70,7 @@ const Index = () => {
       name: 'Калатея Орната',
       price: 2100,
       category: 'Декоративнолистные',
-      image: 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=500',
+      image: 'https://images.unsplash.com/photo-1525498128493-380d1990a112?w=500',
       description: 'Растение с узорчатыми листьями, очищает воздух.'
     },
     {
@@ -78,7 +78,7 @@ const Index = () => {
       name: 'Замиокулькас',
       price: 2800,
       category: 'Неприхотливые',
-      image: 'https://images.unsplash.com/photo-1632207691143-643e2753a2d4?w=500',
+      image: 'https://images.unsplash.com/photo-1591958911259-bee2173bdccc?w=500',
       description: 'Долларовое дерево — символ богатства и благополучия.'
     }
   ];
