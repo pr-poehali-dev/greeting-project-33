@@ -46,7 +46,7 @@ const Index = () => {
       name: 'Фикус Лирата',
       price: 4500,
       category: 'Крупные растения',
-      image: 'https://images.unsplash.com/photo-1545241047-6083a3684587?w=500',
+      image: 'https://cdn.poehali.dev/files/89e43abf-cf98-4a0f-aed7-0cbb0918917f.png',
       description: 'Дерево со скрипичными листьями. Идеально для гостиной.'
     },
     {
