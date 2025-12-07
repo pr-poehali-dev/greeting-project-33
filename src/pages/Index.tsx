@@ -78,7 +78,7 @@ const Index = () => {
       name: 'Замиокулькас',
       price: 2800,
       category: 'Неприхотливые',
-      image: 'https://images.unsplash.com/photo-1591958911259-bee2173bdccc?w=500',
+      image: 'https://cdn.poehali.dev/files/175f1d09-fed7-4001-bc6c-8bc49fea2cc4.png',
       description: 'Долларовое дерево — символ богатства и благополучия.'
     }
   ];
