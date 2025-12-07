@@ -309,18 +309,18 @@ const Index = () => {
       )}
 
       <main className="pt-16">
-        <section id="home" className="min-h-[70vh] flex items-center justify-center bg-gradient-to-br from-background to-secondary/30">
+        <section id="home" className="min-h-[70vh] flex items-center justify-center bg-secondary/20">
           <div className="container mx-auto px-4 text-center animate-fade-in">
             <Badge className="mb-6" variant="outline">
               Живая красота для вашего дома
             </Badge>
-            <h2 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight">
+            <h2 className="text-5xl md:text-7xl font-bold mb-6" style={{letterSpacing: '0.08em'}}>
               Живой уют
             </h2>
-            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+            <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto" style={{lineHeight: '1.8'}}>
               Комнатные растения с доставкой.<br />Здоровые, ухоженные, с гарантией приживаемости
             </p>
-            <Button size="lg" onClick={() => scrollToSection('catalog')} className="group">
+            <Button size="lg" onClick={() => scrollToSection('catalog')} className="group uppercase tracking-widest text-sm font-medium">
               Смотреть коллекцию
               <Icon name="ArrowRight" size={20} className="ml-2 group-hover:translate-x-1 transition-transform" />
             </Button>
@@ -330,7 +330,7 @@ const Index = () => {
         <section id="catalog" className="py-12 bg-background">
           <div className="container mx-auto px-4">
             <div className="text-center mb-8">
-              <h2 className="text-4xl font-bold mb-4">Каталог</h2>
+              <h2 className="text-4xl md:text-5xl font-bold mb-4" style={{letterSpacing: '0.05em'}}>Каталог</h2>
               <p className="text-muted-foreground">Более 100 видов комнатных растений для любого интерьера</p>
             </div>
 
@@ -389,7 +389,7 @@ const Index = () => {
         <section id="about" className="py-12 bg-secondary/20">
           <div className="container mx-auto px-4 max-w-4xl">
             <div className="text-center mb-8">
-              <h2 className="text-4xl font-bold mb-4">О нас</h2>
+              <h2 className="text-4xl md:text-5xl font-bold mb-4" style={{letterSpacing: '0.05em'}}>О нас</h2>
             </div>
             
             <div className="space-y-6 text-center">
@@ -435,7 +435,7 @@ const Index = () => {
         <section id="reviews" className="py-12 bg-background">
           <div className="container mx-auto px-4">
             <div className="text-center mb-8">
-              <h2 className="text-4xl font-bold mb-4">Отзывы</h2>
+              <h2 className="text-4xl md:text-5xl font-bold mb-4" style={{letterSpacing: '0.05em'}}>Отзывы</h2>
               <p className="text-muted-foreground">Что говорят наши клиенты</p>
             </div>
 
@@ -460,7 +460,7 @@ const Index = () => {
         <section id="faq" className="py-12 bg-secondary/20">
           <div className="container mx-auto px-4 max-w-3xl">
             <div className="text-center mb-8">
-              <h2 className="text-4xl font-bold mb-4">Вопросы и ответы</h2>
+              <h2 className="text-4xl md:text-5xl font-bold mb-4" style={{letterSpacing: '0.05em'}}>Вопросы и ответы</h2>
               <p className="text-muted-foreground">Популярные вопросы об уходе за растениями</p>
             </div>
 
@@ -561,7 +561,7 @@ const Index = () => {
         <section id="checkout" className="py-12 bg-secondary/20">
           <div className="container mx-auto px-4 max-w-2xl">
             <div className="text-center mb-8">
-              <h2 className="text-4xl font-bold mb-4">Оформление заказа</h2>
+              <h2 className="text-4xl md:text-5xl font-bold mb-4" style={{letterSpacing: '0.05em'}}>Оформление заказа</h2>
             </div>
 
             <Card>
@@ -641,7 +641,7 @@ const Index = () => {
         <section id="contacts" className="py-12 bg-background">
           <div className="container mx-auto px-4 max-w-2xl">
             <div className="text-center mb-8">
-              <h2 className="text-4xl font-bold mb-4">Контакты</h2>
+              <h2 className="text-4xl md:text-5xl font-bold mb-4" style={{letterSpacing: '0.05em'}}>Контакты</h2>
               <p className="text-muted-foreground">Свяжитесь с нами любым удобным способом</p>
             </div>
 

@@ -1,4 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -6,83 +7,83 @@
 
 @layer base {
   :root {
-    --background: 46 71% 93%;
-    --foreground: 46 31% 39%;
+    --background: 0 0% 100%;
+    --foreground: 25 20% 40%;
 
     --card: 0 0% 100%;
-    --card-foreground: 46 31% 39%;
+    --card-foreground: 25 20% 40%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 46 31% 39%;
+    --popover-foreground: 25 20% 40%;
 
-    --primary: 46 31% 39%;
-    --primary-foreground: 46 71% 93%;
+    --primary: 25 20% 40%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 35 53% 70%;
-    --secondary-foreground: 46 31% 39%;
+    --secondary: 30 18% 83%;
+    --secondary-foreground: 25 20% 40%;
 
-    --muted: 46 71% 93%;
-    --muted-foreground: 30 27% 58%;
+    --muted: 30 18% 83%;
+    --muted-foreground: 25 20% 50%;
 
-    --accent: 200 39% 59%;
+    --accent: 25 20% 40%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 35 53% 80%;
-    --input: 35 53% 80%;
-    --ring: 200 39% 59%;
+    --border: 30 18% 88%;
+    --input: 30 18% 88%;
+    --ring: 25 20% 40%;
 
-    --radius: 0.25rem;
+    --radius: 0rem;
 
-    --sidebar-background: 46 71% 93%;
-    --sidebar-foreground: 46 31% 39%;
-    --sidebar-primary: 46 31% 39%;
-    --sidebar-primary-foreground: 46 71% 93%;
-    --sidebar-accent: 35 53% 70%;
-    --sidebar-accent-foreground: 46 31% 39%;
-    --sidebar-border: 35 53% 80%;
-    --sidebar-ring: 200 39% 59%;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 25 20% 40%;
+    --sidebar-primary: 25 20% 40%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 30 18% 83%;
+    --sidebar-accent-foreground: 25 20% 40%;
+    --sidebar-border: 30 18% 88%;
+    --sidebar-ring: 25 20% 40%;
   }
 
   .dark {
-    --background: 46 31% 39%;
-    --foreground: 46 71% 93%;
+    --background: 25 20% 15%;
+    --foreground: 30 18% 83%;
 
-    --card: 30 27% 58%;
-    --card-foreground: 46 71% 93%;
+    --card: 25 20% 20%;
+    --card-foreground: 30 18% 83%;
 
-    --popover: 30 27% 58%;
-    --popover-foreground: 46 71% 93%;
+    --popover: 25 20% 20%;
+    --popover-foreground: 30 18% 83%;
 
-    --primary: 46 71% 93%;
-    --primary-foreground: 46 31% 39%;
+    --primary: 30 18% 83%;
+    --primary-foreground: 25 20% 15%;
 
-    --secondary: 30 27% 58%;
-    --secondary-foreground: 46 71% 93%;
+    --secondary: 25 20% 25%;
+    --secondary-foreground: 30 18% 83%;
 
-    --muted: 30 27% 58%;
-    --muted-foreground: 35 53% 70%;
+    --muted: 25 20% 25%;
+    --muted-foreground: 30 18% 60%;
 
-    --accent: 200 39% 59%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 30 18% 83%;
+    --accent-foreground: 25 20% 15%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 30 27% 58%;
-    --input: 30 27% 58%;
-    --ring: 200 39% 59%;
+    --border: 25 20% 30%;
+    --input: 25 20% 30%;
+    --ring: 30 18% 83%;
 
-    --sidebar-background: 46 31% 39%;
-    --sidebar-foreground: 46 71% 93%;
-    --sidebar-primary: 46 71% 93%;
-    --sidebar-primary-foreground: 46 31% 39%;
-    --sidebar-accent: 30 27% 58%;
-    --sidebar-accent-foreground: 46 71% 93%;
-    --sidebar-border: 30 27% 58%;
-    --sidebar-ring: 200 39% 59%;
+    --sidebar-background: 25 20% 15%;
+    --sidebar-foreground: 30 18% 83%;
+    --sidebar-primary: 30 18% 83%;
+    --sidebar-primary-foreground: 25 20% 15%;
+    --sidebar-accent: 25 20% 25%;
+    --sidebar-accent-foreground: 30 18% 83%;
+    --sidebar-border: 25 20% 30%;
+    --sidebar-ring: 30 18% 83%;
   }
 }
 
@@ -93,13 +94,7 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family:
-      "Inter",
-      -apple-system,
-      BlinkMacSystemFont,
-      "Segoe UI",
-      Roboto,
-      sans-serif;
+    font-family: "Inter", Arial, Helvetica, sans-serif;
   }
 
   h1,
@@ -108,12 +103,7 @@
   h4,
   h5,
   h6 {
-    font-family:
-      "Inter",
-      -apple-system,
-      BlinkMacSystemFont,
-      "Segoe UI",
-      Roboto,
-      sans-serif;
+    font-family: "Playfair Display", Georgia, serif;
+    letter-spacing: 0.02em;
   }
 }
