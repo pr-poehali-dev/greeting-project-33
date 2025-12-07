@@ -54,7 +54,7 @@ const Index = () => {
       name: 'Сансевиерия',
       price: 1200,
       category: 'Неприхотливые',
-      image: 'https://images.unsplash.com/photo-1509937528035-ad76254b0356?w=500',
+      image: 'https://cdn.poehali.dev/files/e792541c-92f9-4337-a110-afa7d38758a7.png',
       description: 'Теневыносливое растение, не требует частого полива.'
     },
     {
