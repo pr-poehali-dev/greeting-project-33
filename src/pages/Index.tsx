@@ -135,7 +135,7 @@ const Index = () => {
     <div className="min-h-screen">
       <header className="fixed top-0 w-full bg-background/95 backdrop-blur-sm border-b z-50">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <h1 className="text-2xl font-bold tracking-tight">Вот это вещь</h1>
+          <h1 className="text-2xl font-bold tracking-tight">Живой уют</h1>
           
           <nav className="hidden md:flex gap-8">
             <button onClick={() => scrollToSection('home')} className="text-sm hover:text-accent transition-colors">
@@ -315,7 +315,7 @@ const Index = () => {
               Живая красота для вашего дома
             </Badge>
             <h2 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight">
-              Вот это вещь
+              Живой уют
             </h2>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
               Комнатные растения с доставкой.<br />Здоровые, ухоженные, с гарантией приживаемости
@@ -394,7 +394,7 @@ const Index = () => {
             
             <div className="space-y-6 text-center">
               <p className="text-lg">
-                <strong className="text-accent">Вот это вещь</strong> — магазин комнатных растений 
+                <strong className="text-accent">Живой уют</strong> — магазин комнатных растений 
                 для тех, кто ценит живую природу в интерьере.
               </p>
               
@@ -582,7 +582,7 @@ const Index = () => {
 
       <footer className="bg-primary text-primary-foreground py-12">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-2xl font-bold mb-4">Вот это вещь</h2>
+          <h2 className="text-2xl font-bold mb-4">Живой уют</h2>
           <p className="text-sm opacity-80 mb-6">Комнатные растения с любовью</p>
           <div className="flex justify-center gap-6">
             <Button variant="ghost" size="icon" className="text-primary-foreground hover:text-accent">
@@ -595,7 +595,7 @@ const Index = () => {
               <Icon name="Twitter" size={20} />
             </Button>
           </div>
-          <p className="text-xs opacity-60 mt-8">© 2024 Вот это вещь. Все права защищены.</p>
+          <p className="text-xs opacity-60 mt-8">© 2024 Живой уют. Все права защищены.</p>
         </div>
       </footer>
     </div>
