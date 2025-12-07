@@ -309,7 +309,7 @@ const Index = () => {
       )}
 
       <main className="pt-16">
-        <section id="home" className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background to-secondary/30">
+        <section id="home" className="min-h-[70vh] flex items-center justify-center bg-gradient-to-br from-background to-secondary/30">
           <div className="container mx-auto px-4 text-center animate-fade-in">
             <Badge className="mb-6" variant="outline">
               Дизайнерские вещи с характером
